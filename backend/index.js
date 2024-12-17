@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/userRouter.js';
 import recomRouter from './routes/recomRouter.js';
+import finanRouter from './routes/finanRoute.js';
+import chatRouter from './routes/chatbotRouter.js';
 
 // init server
 const app = express();
@@ -16,19 +18,17 @@ app.use(express.json())  ;
 
 // connect to mongodb
 mongoose.connect(process.env.MONGODB_URL, {
-}
-).then(() => {       
+}).then(() => {       
     console.log('Connected to MongoDB');
-}
-).catch((error) => {
-    console.log(error.reason);
-}
-);
+}).catch((error) => {
+    console.error('Error connecting to MongoDB:', error.message);
+});
 
 // routes
 app.use('/api/user' , userRouter)  ; 
 app.use('/api/recom' , recomRouter)  ;
-
+app.use('/api/finance' ,  finanRouter)  ;
+app.use('/api/chatbot' , chatRouter)  ; 
 app.get('/', (req, res) => {
     res.send('Hello World');
 });

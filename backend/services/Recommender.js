@@ -12,15 +12,12 @@ export const generateunirecommendation = async (exam, score, country) => {
         list 10 recommended universities. Format the response as:
         [University Name] - [Location (Country/State)]
 
-        Example:
-        Harvard University - Cambridge, MA, USA
-        Stanford University - Stanford, CA, USA
-
-        Only provide the list in the format above.
+        Ensure the response contains no blank lines and only valid entries in the specified format.
         `;
 
         const result = await model.generateContent(prompt);
-        const recommendationsText = result?.response?.text(); // Ensure the response is accessible
+        const recommendationsText = result?.response?.text();
+        console.log('AI Raw Response:', recommendationsText); // Debug AI response
 
         if (!recommendationsText) {
             throw new Error('No recommendations generated');
@@ -28,6 +25,9 @@ export const generateunirecommendation = async (exam, score, country) => {
 
         const recommendations = recommendationsText
             .split('\n')
+            .map(line => line.trim())
+            .filter(line => line) // Exclude empty lines
+            .slice(0, 10) // Take only the first 10 lines
             .map((line, index) => {
                 const [name, location] = line.split(' - ').map(part => part?.trim());
                 if (name && location) {
@@ -39,7 +39,7 @@ export const generateunirecommendation = async (exam, score, country) => {
             })
             .filter(Boolean); // Remove null entries
 
-        return recommendations.slice(0, 10); // Return up to 10 valid recommendations
+        return recommendations;
     } catch (error) {
         console.error('Error generating recommendations:', error);
         throw new Error('AI recommendation generation failed');
