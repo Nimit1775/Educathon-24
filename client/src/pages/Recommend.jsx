@@ -17,7 +17,7 @@ const UniversityRecommendation = () => {
         setRecommendations([]);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/recom/recom', {
+            const response = await axios.post('https://educathon-24-1.onrender.com/api/recom/recom', {
                 exam,
                 score,
                 country,

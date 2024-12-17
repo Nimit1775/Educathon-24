@@ -21,7 +21,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/user/login", formData);
+      const response = await axios.post("https://educathon-24-1.onrender.com/api/user/login", formData);
       setMessage(response.data.message);
       setUser (response.data.user);
 

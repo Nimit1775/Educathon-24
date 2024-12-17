@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/user/register", formData);
+      const response = await axios.post("https://educathon-24-1.onrender.com/api/user/register", formData);
       setMessage(response.data.message);
 
       // Save token to local storage

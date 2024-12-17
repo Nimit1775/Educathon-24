@@ -18,7 +18,7 @@ const Chatbot = () => {
         setIsBotTyping(true);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/chatbot/chat', { message });
+            const response = await axios.post('https://educathon-24-1.onrender.com/api/chatbot/chat', { message });
             const botMessage = { role: 'bot', content: response.data.response };
 
             // Simulate a small delay for the bot response

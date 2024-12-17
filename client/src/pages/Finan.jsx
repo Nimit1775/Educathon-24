@@ -19,7 +19,7 @@ const Finan = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/finance/calc', formData);
+      const response = await axios.post('https://educathon-24-1.onrender.com/api/finance/calc', formData);
       setResults(response.data.data); // Directly store the raw response
     } catch (error) {
       alert(error.response?.data?.message || "Failed to calculate financial estimates");
